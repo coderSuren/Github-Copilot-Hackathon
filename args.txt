@@ -1,7 +1,2 @@
 
-[]
-[{'coord': {'lon': 80.2785, 'lat': 13.0878}, 'weather': [{'id': 803, 'main': 'Clouds', 'description': 'broken clouds', 'icon': '04d'}], 'base': 'stations', 'main': {'temp': 32.2, 'feels_like': 39.2, 'temp_min': 31.99, 'temp_max': 32.2, 'pressure': 1007, 'humidity': 69}, 'visibility': 4000, 'wind': {'speed': 4.12, 'deg': 80}, 'clouds': {'all': 75}, 'dt': 1685961406, 'sys': {'type': 2, 'id': 2012809, 'country': 'IN', 'sunrise': 1685923898, 'sunset': 1685970194}, 'timezone': 19800, 'id': 1264527, 'name': 'Chennai', 'cod': 200}]
-[]
-[]
-[True, True]
-[True, True]
+{'temperature': 36.97, 'sunrise': 1685920889, 'sunset': 1685969319}
