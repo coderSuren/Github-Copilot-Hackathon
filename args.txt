@@ -1,2 +1,0 @@
-
-{'temperature': 36.97, 'sunrise': 1685920889, 'sunset': 1685969319}
