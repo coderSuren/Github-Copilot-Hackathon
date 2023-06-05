@@ -26,8 +26,10 @@ def main():
         
         print(data)   
     
-    a=[]
-        
+    a={}
+    file_path = "args.json"  # Specify the file path where you want to store the values
+    with open(file_path,"w") as file:
+        file.truncate()
     d = list(args.city.split(','))
     for city in d:
         data = main2.get_weather_data(city)
@@ -38,28 +40,35 @@ def main():
             """ display weather description """
             print(f'\nWeather data for {data["name"]}, {data["sys"]["country"]}:')
             print(f'Weather description: {data["weather"][0]["description"]}')
-
+        a["city"] = city
         if args.temperature:
             print(f'Temperature: {data["main"]["temp"]}°C')
+            a["temperature"]=data["main"]["temp"]
         if args.pressure:
             print(f'Pressure: {data["main"]["pressure"]} hPa')
+            a["pressure"]=data["main"]["pressure"]
         if args.humidity:
             print(f'Humidity: {data["main"]["humidity"]}%')
+            a["humidity"] =data["main"]["humidity"]
         if args.wind:
             print(f'Wind speed: {data["wind"]["speed"]} m/s')
             print(f'Wind direction: {data["wind"]["deg"]}°')
+            a["wind speed"] = data["main"]["wind"]["speed"]
+            a["wind deg"] = data["main"]["wind"]["deg"]
+
         if args.sun:
             sunrise = main2.datetime.fromtimestamp(data['sys']['sunrise']).strftime('%H:%M:%S')
             sunset = main2.datetime.fromtimestamp(data['sys']['sunset']).strftime('%H:%M:%S')
             print(f'Sunrise: {sunrise}')
             print(f'Sunset: {sunset}')
-        if args.store:
-            a.append(data)
+            a["sunrise"]=data['sys']['sunrise']
+            a["sunset"]=data['sys']['sunset']
 
-    file_path = "args.txt"  # Specify the file path where you want to store the values
-    with open(file_path, "a") as file:
-        file.write("\n")
-            file.write(str(a))
+        if args.store:
+            file_path = "args.json"  # Specify the file path where you want to store the values
+            with open(file_path, "a") as file:
+                file.write(str(a))
+                file.write("\n")
 
 if __name__ == '__main__':
     main()
