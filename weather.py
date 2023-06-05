@@ -6,6 +6,8 @@ import main2
 def main():
     """ main function """
     parser = argparse.ArgumentParser(description='Fetch weather data from openweathermap.org and display weather data based on user input', prog='weather', usage='%(prog)s city [options] ', epilog='Enjoy the program! :)', prefix_chars='-+/')
+    gen = parser.add_argument_group('subcommands')
+    gen.add_argument('-st', '--store', help='storing weather data in new file', action='store_true')
     parser.add_argument('city', help='city name')
     parser.add_argument('-v', '--version', action='version', version='%(prog)s 1.0')
     parser.add_argument('-t', '--temperature', help='temperature in °C', action='store_true')
@@ -18,9 +20,13 @@ def main():
     """if hi choosen get data from get_weather_history function and display it"""
     parser.add_argument('-hi', '--history', help='get 5 day weather history', action='store_true')
     args = parser.parse_args()
+
     if args.history:
         data = main2.get_weather_history(args.city)
+        
         print(data)   
+    
+    a=[]
         
     d = list(args.city.split(','))
     for city in d:
@@ -47,6 +53,14 @@ def main():
             sunset = main2.datetime.fromtimestamp(data['sys']['sunset']).strftime('%H:%M:%S')
             print(f'Sunrise: {sunrise}')
             print(f'Sunset: {sunset}')
+        if args.store:
+            a.append(data)
+
+    file_path = "args.txt"  # Specify the file path where you want to store the values
+    with open(file_path, "a") as file:
+        file.write("\n")
+            file.write(str(a))
+
 if __name__ == '__main__':
     main()
 
