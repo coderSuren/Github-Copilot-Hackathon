@@ -5,12 +5,12 @@ import json
 
 
 def to_json(data,args):
-
+    """ store weather data in json format """
     dictionary = {
         "weather":[]
     }
 
-    if args.history:
+    if args.forecast:
         for city in data:
             for i in city['list']: 
                 dictionary['weather'].append({
@@ -34,8 +34,8 @@ def to_json(data,args):
                 'wind_direction':city['wind']['deg']
             })
 
-
-    with open("sample.json", "w") as outfile:
+    path=args.store+".json"
+    with open(path, "w") as outfile:
         json.dump(dictionary, outfile)
 
 def to_csv(data):
@@ -65,6 +65,7 @@ def display_weather_data(data, city, args):
         sunset = datetime.fromtimestamp(data['sys']['sunset']).strftime('%H:%M:%S')
         print(f'Sunrise: {sunrise}')
         print(f'Sunset: {sunset}')
+    print()
 
 def display_full_weather_data(data):
     """ display weather data based on user input """
@@ -94,7 +95,7 @@ def display_full_weather_data(data):
         print(f'Wind direction: {wind_deg}°')
         print(f'Sunrise: {sunrise}')
         print(f'Sunset: {sunset}')
-
+        print()
 
 def display_weather_history(data,args):
      
@@ -103,7 +104,7 @@ def display_weather_history(data,args):
     else:
         city = data['city']['name']
         country = data['city']['country']
-        print(f'Weather history for {city}, {country}:')
+        print(f'Weather forecast of {city}, {country} for next 5 days:')
         """use prettytable to display data in tabular format"""
         table = PrettyTable()
         fields=['Date', 'Description']
